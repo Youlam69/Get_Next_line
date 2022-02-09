@@ -82,6 +82,12 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	while (i < len && s[start])
 		str[i++] = s[start++];
 	str[i] = '\0';
+	if(str[0] == '\0')
+	{
+		free(str);
+		str = NULL;
+		return (NULL);
+	}
 	return (str);
 }
 
