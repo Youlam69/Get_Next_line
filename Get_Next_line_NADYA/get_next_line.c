@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ylamraou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/10 14:54:13 by ylamraou          #+#    #+#             */
+/*   Updated: 2022/02/10 14:54:18 by ylamraou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 int	searchnewline(char *s)
@@ -19,7 +31,7 @@ int	searchnewline(char *s)
 char	*to_alloc(int fd, char *str, int *r1)
 {
 	char	*tmp;
-	int 	r;
+	int		r;
 
 	r = 1;
 	while (searchnewline(str) == -1 && r)
@@ -53,54 +65,21 @@ char	*get_next_line(int fd)
 	char		*toswitch;
 
 	stock = 0;
-	r1 = 1;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+	r1 = 1;
 	str = to_alloc(fd, str, &r1);
 	toswitch = str;
 	stock = searchnewline(str);
 	if (r1 <= 0)
 		stock = ft_strlen(str);
 	tmp = ft_substr(str, 0, stock + 1);
-	if(!tmp)
+	if (!tmp)
 		return (NULL);
 	str = ft_substr(str, stock + 1, ft_strlen(str));
 	free(toswitch);
-	if (r1 <= 0 )
+	if (r1 <= 0)
 	{
 		free(str);
 		str = NULL;
 	}
 	return (tmp);
-}
-
-int main()
-{
-	char *tab;
-	int j = open("./test.txt", O_RDWR, 777);
-	tab = get_next_line(j);
-		// printf("%s",tab);
-		ft_putstr_fd(tab,1);
-	tab = get_next_line(j);
-		// printf("%s",tab);
-		ft_putstr_fd(tab,1);
-	tab = get_next_line(j);
-		// printf("%s",tab);
-		ft_putstr_fd(tab,1);
-
-	tab = get_next_line(j);
-		// printf("%s",tab);
-		ft_putstr_fd(tab,1);
-
-
-	tab = get_next_line(j);
-		// printf("%s",tab);
-		ft_putstr_fd(tab,1);
-
-	tab = get_next_line(j);
-		// printf("%s",tab);
-		ft_putstr_fd(tab,1);
-
-	tab = get_next_line(j);
-		// printf("%s",tab);
-		ft_putstr_fd(tab,1);
-
 }

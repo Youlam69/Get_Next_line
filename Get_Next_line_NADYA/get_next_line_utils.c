@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ylamraou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/10 14:54:36 by ylamraou          #+#    #+#             */
+/*   Updated: 2022/02/10 14:54:39 by ylamraou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 size_t	ft_strlen(const char *str)
@@ -30,8 +42,9 @@ char	*ft_strcat(char *dst, char *src)
 {
 	size_t	i;
 	size_t	lendst;
-	if(!src)
-		return(dst);
+
+	if (!src)
+		return (dst);
 	i = -1;
 	lendst = ft_strlen(dst);
 	while (src[++i])
@@ -50,13 +63,13 @@ char	*ft_strjoin(char *s1, char *s2)
 		return (NULL);
 	l1 = ft_strlen(s1);
 	l2 = ft_strlen(s2);
-	str = ft_calloc(l1 + l2 + 1 , sizeof(char));
+	str = ft_calloc(l1 + l2 + 1, sizeof(char));
 	str[l1 + l2] = '\0';
 	if (!str)
 		return (NULL);
 	ft_strcat(str, s1);
 	ft_strcat(str, s2);
-	if(s1)
+	if (s1)
 	{
 		free(s1);
 		s1 = NULL;
@@ -82,7 +95,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	while (i < len && s[start])
 		str[i++] = s[start++];
 	str[i] = '\0';
-	if(str[0] == '\0')
+	if (str[0] == '\0')
 	{
 		free(str);
 		str = NULL;
@@ -90,4 +103,3 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	}
 	return (str);
 }
-
