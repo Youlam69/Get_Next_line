@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylamraou <ylamraou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 14:54:13 by ylamraou          #+#    #+#             */
-/*   Updated: 2022/02/11 12:50:24 by ylamraou         ###   ########.fr       */
+/*   Updated: 2022/02/11 13:06:35 by ylamraou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 int	searchnewline(char *s)
 {
@@ -58,7 +58,7 @@ char	*to_alloc(int fd, char *str, int *r1)
 
 char	*get_next_line(int fd)
 {
-	static char	*str;
+	static char	*str[10240];
 	char		*tmp;
 	int			r1;
 	int			stock;
@@ -67,20 +67,20 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	stock = 0;
-	str = to_alloc(fd, str, &r1);
-	toswitch = str;
-	stock = searchnewline(str);
+	str[fd] = to_alloc(fd, str[fd], &r1);
+	toswitch = str[fd];
+	stock = searchnewline(str[fd]);
 	if (r1 <= 0)
-		stock = ft_strlen(str);
-	tmp = ft_substr(str, 0, stock + 1);
+		stock = ft_strlen(str[fd]);
+	tmp = ft_substr(str[fd], 0, stock + 1);
 	if (!tmp)
 		return (NULL);
-	str = ft_substr(str, stock + 1, ft_strlen(str));
+	str[fd] = ft_substr(str[fd], stock + 1, ft_strlen(str[fd]));
 	free(toswitch);
 	if (r1 <= 0)
 	{
-		free(str);
-		str = NULL;
+		free(str[fd]);
+		str[fd] = NULL;
 	}
 	return (tmp);
 }
